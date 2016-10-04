@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab25_ValidateUserInformation.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,23 @@ namespace Lab25_ValidateUserInformation.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        public ViewResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        [HttpPost]
+        public ViewResult Index(Student students)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                return View("Thanks", students);
+            }else
+            {
+                return View();
+            }
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+      
     }
 }
